@@ -74,3 +74,34 @@ function longestSubstring(s) {
 }
 
 longestSubstring("abcdefab");
+
+function quickSort(arr, start, end) {
+  if (start >= end) return;
+  let left = start;
+  let right = end;
+  let p = arr[left];
+
+  while (left < right) {
+    while (left < right && arr[right] >= p) {
+      right--;
+    }
+    if (left < right) {
+      arr[left] = arr[right];
+      left++;
+    }
+    while (left < right && arr[left] <= p) {
+      left++;
+    }
+    if (left < right) {
+      arr[right] = arr[left];
+      right--;
+    }
+  }
+  arr[left] = p;
+  quickSort(arr, start, left - 1);
+  quickSort(arr, right + 1, end);
+}
+
+let arr = [5, 2, 3, 1];
+quickSort(arr, 0, arr.length - 1);
+console.log(arr);
