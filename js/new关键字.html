@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function myNew(fn, ...arg){
+            const obj = {};
+            Object.setPrototypeOf(obj, fn.prototype);
+            fn.apply(obj, arg);
+            return obj;
+        }
+
+        function Dog(name){
+            this.name = name;
+        }
+
+        Dog.prototype.say = function(){
+            console.log(this.name + ": wolf!wolf!");
+        }
+
+        let dog1 = new Dog("Teddy");
+        let dog2 = myNew(Dog, "Tom");
+
+        console.log(dog1);
+        console.log(dog2);
+        dog1.say();
+        dog2.say();
+
+    </script>
+</body>
+</html>
